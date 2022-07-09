@@ -26,7 +26,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     [
       query('image_url').isURL(isURLOptions).withMessage('Should have a valid url'),
     ],
-    async ( req: Request, res: Response ) => {
+    async (err, req: Request, res: Response, next) => {
     
     // validate the image_url query
     const errors = validationResult(req);

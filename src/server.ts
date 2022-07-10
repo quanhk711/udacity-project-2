@@ -26,8 +26,9 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     [
       query('image_url').isURL(isURLOptions).withMessage('Should have a valid url'),
     ],
-    async (err, req: Request, res: Response, next) => {
+    async ( req: Request, res: Response ) => {
     
+    let {image_url} = req.query;
     // validate the image_url query
     const errors = validationResult(req);
     
@@ -37,8 +38,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
     }
 
     // call filterImageFromURL(image_url) to filter the image
-    const filteredpath = await filterImageFromURL(req.query)
-
+    const filteredpath = await filterImageFromURL(image_url);
     return res.sendFile(filteredpath, ()=>{
       deleteLocalFiles([filteredpath]) // deletes any files on the server on finish of the response
     })

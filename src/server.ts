@@ -39,7 +39,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
     // call filterImageFromURL(image_url) to filter the image
     const filteredpath = await filterImageFromURL(image_url);
-    return res.sendFile(filteredpath, ()=>{
+    return res.status(200).sendFile(filteredpath, ()=>{
       deleteLocalFiles([filteredpath]) // deletes any files on the server on finish of the response
     })
       
